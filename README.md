@@ -4,6 +4,8 @@ This project retrieves and does some basic data science on my Strava data. This 
 
 The key element is the `Get_Strava_Data.r` file because it shows how to pull the data out of Strava to begin with. 
 
+# THE PROJECT ISN'T QUITE DONE
+
 # Requirements
 
 In addition to R (I used RStudio as well), you'll need the following libraries installed in R (you can do this with `install.packages("PACKAGE NAME")` inside one of the R files:
