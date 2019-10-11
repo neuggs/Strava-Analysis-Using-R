@@ -13,7 +13,7 @@ strava_data <- read.xlsx("./all_data.xlsx", 1, colClasses = data_types, header=T
 # Only ride data
 ride_data <- subset(strava_data, (type == 'VirtualRide' | type == 'Ride') & average_watts > 0)
 
-assumptions <- function(field_label, data, field, bins) {
+perf_analysis <- function(field_label, data, field, bins) {
   gg <- ggplot(data, aes(field)) + geom_histogram(bins=bins) + 
      stat_function(fun=dnorm, args=list(mean = mean(field, na.rm=TRUE), sd = sd(field, na.rm=TRUE)), 
                    color='black', size=1) +
@@ -49,12 +49,12 @@ assumptions <- function(field_label, data, field, bins) {
   }
 }
 
-a <- assumptions('Average Speed (MPH)', ride_data, ride_data$average_speed_mph, 15)
-a <- assumptions('Distance (Miles)', ride_data, ride_data$distance_mi, 15)
-a <- assumptions('Moving Time (Minutes)', ride_data, ride_data$moving_time, 15)
-a <- assumptions('Elevation Gain (Feet)', ride_data, ride_data$elevation_gain_ft, 15)
-a <- assumptions('Average Power (Watts)', ride_data, ride_data$average_watts, 15)
-a <- assumptions('Average Heart Rate', ride_data, ride_data$average_heartrate, 15)
+a <- perf_analysis('Average Speed (MPH)', ride_data, ride_data$average_speed_mph, 15)
+a <- perf_analysis('Distance (Miles)', ride_data, ride_data$distance_mi, 15)
+a <- perf_analysis('Moving Time (Minutes)', ride_data, ride_data$moving_time, 15)
+a <- perf_analysis('Elevation Gain (Feet)', ride_data, ride_data$elevation_gain_ft, 15)
+a <- perf_analysis('Average Power (Watts)', ride_data, ride_data$average_watts, 15)
+a <- perf_analysis('Average Heart Rate', ride_data, ride_data$average_heartrate, 15)
  
 
 ggplot(ride_data, aes(x = distance_mi, y = average_speed_mph), color = factor(gear_id)) + 
